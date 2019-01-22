@@ -1,7 +1,7 @@
 package RestAPI.example.model;
 
+import java.util.Date;
 import javax.persistence.*;
-//import java.util.Date;
 
 @Entity
 @Table(name = "Users")
@@ -15,8 +15,8 @@ public class User {
 	private String lastName;
 	@Column
 	private String email;
-//	@Column(name = "CREATED_DATE")
-//	private Date birthdate;
+	@Column
+	private Date birthdate;
 	@Column
 	private short age;
 	@Column
@@ -27,10 +27,11 @@ public class User {
 	protected User() {
 	}
 
-	public User(String firstName, String lastName, String email, short age, float budget, boolean status) {
+	public User(String firstName, String lastName, String email, Date birthdate, short age, float budget, boolean status) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.birthdate=birthdate;
 		this.age = age;
 		this.budget = budget;
 		this.status = status;
@@ -43,6 +44,7 @@ public class User {
 				", firstName='" + firstName + '\'' + 
 				", lastName='" + lastName + '\'' + 
 				", email='" + email + '\'' + 
+				", birthdate='" + birthdate + '\'' + 
 				", age='" + age + '\'' + 
 				", budget='" + budget + '\'' + 
 				", status=" + status + '}';
@@ -80,13 +82,13 @@ public class User {
 		this.email = email;
 	}
 
-//	public Date getBirthdate() {
-//		return birthdate;
-//	}
-//
-//	public void setBirthdate(Date birthdate) {
-//		this.birthdate = birthdate;
-//	}
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
 
 	public short getAge() {
 		return age;

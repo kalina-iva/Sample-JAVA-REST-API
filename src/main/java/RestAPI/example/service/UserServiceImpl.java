@@ -17,17 +17,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public List<User> getAll() {
+		return usersRepo.findAll();
+	}
+
+	@Override
 	public void create(User user) {
 		usersRepo.save(user);
 	}
 
 	@Override
-	public List<User> getAll() {
-		return usersRepo.findAll();
-	}
-	@Override
 	public void delete(Long id) {
 		usersRepo.deleteById(id);
 	}
-
 }
