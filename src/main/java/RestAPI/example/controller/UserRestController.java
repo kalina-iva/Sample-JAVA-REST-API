@@ -20,7 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("/api/users/")
+@RequestMapping({ "/api/users/", "/api/users" })
 public class UserRestController {
 	public static final Logger logger = LoggerFactory.getLogger(UserRestController.class);
 	@Autowired
@@ -55,7 +55,10 @@ public class UserRestController {
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<User> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
 		logger.info("Добавление пользователя: {}", user);
-
+		if (user.getFirstName() == null || user.getLastName() == null) {
+			logger.debug("Добавление пользователя невозможно. Отсутствуют имя или фамилия пользователя");
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		userService.create(user);
 
 		HttpHeaders headers = new HttpHeaders();
